@@ -8,6 +8,11 @@ package com.rookie.common.constant;
 public class ComConstant {
 
     /**
+     * -
+     */
+    public static final String MID_LINE = "-";
+
+    /**
      * "null"
      */
     public static final String NULL = "null";

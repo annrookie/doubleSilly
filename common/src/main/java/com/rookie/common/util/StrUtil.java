@@ -4,6 +4,8 @@ import com.rookie.common.constant.ComConstant;
 import com.rookie.common.constant.Mode;
 import com.sun.istack.internal.NotNull;
 
+import java.util.UUID;
+
 /**
  * 字符串工具类
  *
@@ -273,6 +275,27 @@ public class StrUtil {
         return isEmpty(str) ? null : str;
     }
 
+    /**
+     * 大小写字母互相转换
+     *
+     * @param str 字符串
+     * @return 转换完的字符串
+     */
+    public static String caseChange(String str) {
+        if (isEmpty(str)) {
+            return "";
+        }
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (CharUtil.isLowLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+            } else if (CharUtil.isUpLetter(chars[i])) {
+                chars[i] = Character.toLowerCase(chars[i]);
+            }
+        }
+        return new String(chars);
+    }
+
     // change end----------------------------------------------------
 
     // trim start----------------------------------------------------
@@ -317,12 +340,12 @@ public class StrUtil {
     }
 
     /**
-     * 去除字符串所有空白符
+     * 去除字符串两边所有空白符
      *
      * @param str 字符串
      * @return 去完空的空白符
      */
-    public static String trimBlank(String str) {
+    public static String cleanBlank(String str) {
         return blankCharToStr(str, ComConstant.EMPTY_STR);
     }
 
@@ -480,5 +503,132 @@ public class StrUtil {
 
     // 字母转换 end -----------------------------------------------------
 
-    //
+    // add start -------------------------------------------------------
+
+    /**
+     * 添加前缀
+     * 弱添加：当需添加的字符串包含前缀，则返回，若无则添加
+     *
+     * @param str     需添加的字符串
+     * @param prefix  前缀
+     * @param weekAdd 是否弱添加
+     * @return 字符串
+     */
+    public static String addPrefix(String str, String prefix, boolean weekAdd) {
+        if (isEmpty(prefix)) {
+            return str;
+        }
+        if (weekAdd) {
+            return startWith(str, prefix) ? str : prefix + str;
+        } else {
+            return addPrefix(str, prefix);
+        }
+    }
+
+    /**
+     * 添加前缀
+     *
+     * @param str    字符串
+     * @param prefix 前缀
+     * @return 添加完字符串
+     */
+    public static String addPrefix(String str, String prefix) {
+        return isEmpty(prefix) ? str : prefix + str;
+    }
+
+    /**
+     * 添加后缀
+     * 弱添加：当需添加的字符串包含后缀，则返回，若无则添加
+     *
+     * @param str     需添加的字符串
+     * @param suffix  后缀
+     * @param weekAdd 是否弱添加
+     * @return 字符串
+     */
+    public static String addSuffix(String str, String suffix, boolean weekAdd) {
+        if (isEmpty(suffix)) {
+            return str;
+        }
+        if (weekAdd) {
+            return endWith(str, suffix) ? str : str + suffix;
+        } else {
+            return addSuffix(str, suffix);
+        }
+    }
+
+    /**
+     * 添加后缀
+     *
+     * @param str    字符串
+     * @param suffix 后缀
+     * @return 添加完字符串
+     */
+    public static String addSuffix(String str, String suffix) {
+        return isEmpty(suffix) ? str : str + suffix;
+    }
+
+    /**
+     * 添加前后缀
+     *
+     * @param str     字符串
+     * @param prefix  前缀
+     * @param suffix  后缀
+     * @param weekAdd 是否弱添加
+     * @return 添加完字符串
+     */
+    public static String addPrefixAndSuffix(String str, String prefix, String suffix, boolean weekAdd) {
+        String s;
+        s = addPrefix(str, prefix, weekAdd);
+        return addSuffix(s, suffix, weekAdd);
+    }
+
+    /**
+     * 添加前后缀
+     *
+     * @param str    需添加字符串
+     * @param prefix 前缀
+     * @param suffix 后缀
+     * @return 添加完的字符串
+     */
+    public static String addPrefixAndSuffix(String str, String prefix, String suffix) {
+        String s = addPrefix(str, prefix);
+        return addSuffix(s, suffix);
+    }
+
+    // add end ----------------------------------------------------------
+
+    // random start------------------------------------------------------
+
+    public static String getUuid() {
+        return UUID.randomUUID().toString();
+    }
+
+    public static String uuid() {
+        return getUuid().replaceAll(ComConstant.MID_LINE, ComConstant.EMPTY_STR);
+    }
+
+    // random end ------------------------------------------------------
+
+    // join start -----------------------------------------------------
+
+    /**
+     * 将一个或多个字符串拼接在一起
+     *
+     * @param strs 可变字符串
+     * @return 拼接完字符串
+     */
+    public static String concat(CharSequence... strs) {
+        if (null == strs || strs.length < 1) {
+            return ComConstant.EMPTY_STR;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (CharSequence str : strs) {
+            if (isNotEmpty(str)) {
+                sb.append(str);
+            }
+        }
+        return sb.toString();
+    }
+
+    // join end -----------------------------------------------------
 }

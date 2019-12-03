@@ -2,10 +2,7 @@ package com.rookie.common.util;
 
 import com.rookie.common.constant.ComConstant;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 随机生成对象工具类
@@ -173,5 +170,14 @@ public class RandomUtil {
             return null;
         }
         return new HashSet<>(list);
+    }
+
+    /**
+     * 生产uuid
+     *
+     * @return uuid
+     */
+    public static String uuid() {
+        return UUID.randomUUID().toString();
     }
 }

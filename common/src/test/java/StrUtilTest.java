@@ -51,4 +51,30 @@ public class StrUtilTest {
         System.out.println(StrUtil.upperFirst(" null"));
         System.out.println(StrUtil.lowerFirst(" 1Null"));
     }
+
+    @Test
+    public void addTest() {
+        System.out.println(StrUtil.addPrefix("", "", true));
+        System.out.println(StrUtil.addPrefix("", ""));
+        System.out.println(StrUtil.addSuffix("123", "1"));
+        System.out.println(StrUtil.addSuffix("12312", "12", true));
+        System.out.println(StrUtil.addPrefixAndSuffix("", "", "", false));
+        System.out.println(StrUtil.addPrefixAndSuffix("asd", "231", "412"));
+    }
+
+    @Test
+    public void randomTest() {
+        System.out.println(StrUtil.getUuid());
+        System.out.println(StrUtil.uuid());
+    }
+
+    @Test
+    public void caseChangeTest() {
+        System.out.println(StrUtil.caseChange("AdsxVasd"));
+    }
+
+    @Test
+    public void concatTest() {
+        System.out.println(StrUtil.concat("123","123","das"));
+    }
 }
