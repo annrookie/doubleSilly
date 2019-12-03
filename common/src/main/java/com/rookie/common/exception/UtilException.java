@@ -7,7 +7,6 @@ import com.rookie.common.constant.CodeResult;
  *
  * @author hanhan
  * @version 1.0
- * @date 2019-10-30 16:55:11
  */
 public class UtilException extends RuntimeException {
 

@@ -13,7 +13,7 @@ public class NumberUtil {
 
     /**
      * 格式化数字
-     * 10000 => 10,000
+     * 10000 =&gt; 10,000
      *
      * @param num 数字
      * @return 格式化完的数字字符串
@@ -24,7 +24,7 @@ public class NumberUtil {
 
     /**
      * 格式化数字
-     * 1000 => 1,000
+     * 1000 =&gt; 1,000
      *
      * @param num 数字
      * @return 格式化完的数字字符串
@@ -53,7 +53,7 @@ public class NumberUtil {
 
     /**
      * 字符串数字格式化
-     * "1000" => "1,000"
+     * "1000" =&gt; "1,000"
      *
      * @param numStr 数字字符串
      * @return 格式完的字符串

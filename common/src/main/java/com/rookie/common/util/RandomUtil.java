@@ -32,6 +32,7 @@ public class RandomUtil {
     /**
      * 随机生成指定长度大小写字母
      *
+     * @param length 指定长度
      * @return 指定长度字母字符串
      */
     public static String randomLetter(int length) {
@@ -59,6 +60,7 @@ public class RandomUtil {
     /**
      * 随机生成指定长度大写字母串
      *
+     * @param length 指定长度
      * @return 指定长度字母字符串
      */
     public static String randomUpLetter(int length) {
@@ -160,8 +162,9 @@ public class RandomUtil {
     /**
      * 随机生成size个length长度的字符串集合
      *
-     * @param length 字符串长度
-     * @param size   字符串个数
+     * @param targetStr 目标字符串
+     * @param length    字符串长度
+     * @param size      字符串个数
      * @return 字符串集合
      */
     public static Set<String> randomSet(String targetStr, int length, int size) {

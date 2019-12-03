@@ -8,7 +8,6 @@ import com.rookie.common.constant.ComConstant;
  *
  * @author hanhan
  * @version 1.0
- * @date 2019-10-30 15:49:44
  */
 public class ArrayUtil {
 
@@ -396,6 +395,7 @@ public class ArrayUtil {
      * @param format       拼接格式
      * @param isAddBracket 是否添加[]
      * @param isAddSpace   是否带空格
+     * @param filter       过滤条件
      * @param <T>          泛型数组
      * @return 拼接完的字符串
      */
