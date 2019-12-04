@@ -3,6 +3,8 @@ import com.rookie.common.constant.Month;
 import com.rookie.common.util.StrUtil;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class StrUtilTest {
 
     @Test
@@ -75,6 +77,24 @@ public class StrUtilTest {
 
     @Test
     public void concatTest() {
-        System.out.println(StrUtil.concat("123","123","das"));
+        System.out.println(StrUtil.concat("123", "123", "das"));
+    }
+
+    @Test
+    public void replaceTest() {
+        System.out.println(StrUtil.replace("null", -1, 0, '*'));
+        System.out.println(StrUtil.replace("abca4124142124dqe", 1, 12, "111"));
+        System.out.println(StrUtil.hide("asd4214124124124fasv12d", '`', 3, 6));
+        System.out.println(StrUtil.hide("35123412445"));
+    }
+
+    @Test
+    public void reverseTest() {
+        System.out.println(StrUtil.reverse("abddrq"));
+    }
+
+    @Test
+    public void avgDivideTest() {
+        System.out.println(Arrays.toString(StrUtil.avgDivide("abcd", 0)));
     }
 }

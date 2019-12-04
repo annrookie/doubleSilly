@@ -141,4 +141,9 @@ public class ComConstant {
      * 英文字符
      */
     public static final String CHARACTER = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789`~!@#$%^&*()_+-=}{\\|]['\";:/.,<>";
+
+    /**
+     * *
+     */
+    public static final char START = '*';
 }

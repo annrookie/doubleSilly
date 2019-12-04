@@ -2,7 +2,7 @@ package com.rookie.common.util;
 
 import com.rookie.common.constant.ComConstant;
 import com.rookie.common.constant.Mode;
-import com.sun.istack.internal.NotNull;
+import com.rookie.common.exception.UtilException;
 
 import java.util.UUID;
 
@@ -162,6 +162,41 @@ public class StrUtil {
         return isEmpty(str) || isUndefinedStr(str) || isBlank(str) || isNullStr(str);
     }
 
+    /**
+     * 判断是否全部为小写字符串
+     *
+     * @param str 需校验的字符串
+     * @return 是否为小写字符串
+     */
+    public static boolean isLowerCase(String str) {
+        if (isEmpty(str)) {
+            return false;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (!CharUtil.isLowLetter(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断是否为大写字符串
+     *
+     * @param str 需判断的字符串
+     * @return 是否为大写字符串
+     */
+    public static boolean isUpperCase(String str) {
+        if (isEmpty(str)) {
+            return false;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (!CharUtil.isUpLetter(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
     // 常见判断 end ---------------------------------------------------
 
     // change start ---------------------------------------------------
@@ -296,6 +331,138 @@ public class StrUtil {
         return new String(chars);
     }
 
+    /**
+     * 将指定字符串区间内（左包右不包）内的字符替换为指定字符
+     * 开始索引&gt;结束索引 || 开始索引&gt;字符串长度 || 结束索引&lt;0 <br>
+     * 返回原本字符串
+     *
+     * @param str         替换字符串
+     * @param startIndex  开始索引 (包含)
+     * @param endIndex    结束索引 (不包含)
+     * @param replaceChar 指定字符
+     * @return 替换为的字符串
+     */
+    public static String replace(String str, int startIndex, int endIndex, char replaceChar) {
+        if (isEmpty(str)) {
+            return ComConstant.EMPTY_STR;
+        }
+        int length = str.length();
+        if (startIndex > length || endIndex <= ComConstant.ZERO || startIndex > endIndex) {
+            return str;
+        }
+        int min = Math.max(startIndex, 0);
+        int max = Math.min(endIndex, length);
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < length; i++) {
+            if (i >= min && i < max) {
+                chars[i] = replaceChar;
+            }
+        }
+        return new String(chars);
+    }
+
+    /**
+     * 将指定字符串区间内（左包右不包）内的字符替换为指定字符串
+     * 开始索引&gt;结束索引 || 开始索引&gt;字符串长度 || 结束索引&lt;0 <br>
+     * 返回原本字符串
+     *
+     * @param str        需替换字符串
+     * @param startIndex 开始索引（包含）
+     * @param endIndex   结束索引（不包含）
+     * @param replaceStr 替换的字符串
+     * @return 替换完的字符串
+     */
+    public static String replace(String str, int startIndex, int endIndex, String replaceStr) {
+        if (isEmpty(str)) {
+            return ComConstant.EMPTY_STR;
+        }
+        int length = str.length();
+        if (startIndex > length || endIndex <= ComConstant.ZERO || startIndex > endIndex) {
+            return str;
+        }
+        int min = Math.max(startIndex, 0);
+        int max = Math.min(endIndex, length);
+        if (min == 0 && max == length) {
+            return replaceStr;
+        }
+        StringBuilder sb = new StringBuilder();
+        if (min > 0) {
+            String first = str.substring(0, min);
+            sb.append(first);
+        }
+        sb.append(replaceStr);
+        if (max < length) {
+            String last = str.substring(max);
+            sb.append(last);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将指定字符串区间内（开始到结束）内的字符替换为指定字符
+     * 开始索引&gt;结束索引 || 开始索引&gt;字符串长度 || 结束索引&lt;0 <br>
+     * 返回原本字符串
+     *
+     * @param str         替换字符串
+     * @param startIndex  开始索引 (包含)
+     * @param replaceChar 指定字符
+     * @return 替换为的字符串
+     */
+    public static String replace(String str, int startIndex, char replaceChar) {
+        return isEmpty(str) ? ComConstant.EMPTY_STR : replace(str, startIndex, str.length(), replaceChar);
+    }
+
+    /**
+     * 将指定字符串区间内（开始到结束）内的字符替换为指定字符串
+     * 开始索引&gt;结束索引 || 开始索引&gt;字符串长度 || 结束索引&lt;0 <br>
+     * 返回原本字符串
+     *
+     * @param str        需替换字符串
+     * @param startIndex 开始索引（包含）
+     * @param replaceStr 替换的字符串
+     * @return 替换完的字符串
+     */
+    public static String replace(String str, int startIndex, String replaceStr) {
+        return isEmpty(str) ? ComConstant.EMPTY_STR : replace(str, startIndex, str.length(), replaceStr);
+    }
+
+    /**
+     * 字符串中间部分隐藏
+     * 在minLength长度（含）以内都会被隐藏
+     *
+     * @param str          需隐藏的字符串
+     * @param minLength    在此范围内（含）都被隐藏
+     * @param hideLength   隐藏符号长度，若加上首尾显示字符串长度&gt;字符串总长度，则为字符串总长度-首尾字符串长度
+     * @param hideFlagChar 隐藏符号
+     * @return 隐藏后的字符串
+     */
+    public static String hide(String str, char hideFlagChar, int minLength, int hideLength) {
+        if (str.length() <= minLength) {
+            return newStr(hideFlagChar, str.length());
+        }
+        // 三等分四舍五入
+        int i = Math.round((float) str.length() / ComConstant.THREE);
+        i = Math.min(i, ComConstant.FOUR);
+        int max = str.length() - i;
+        hideLength = Math.min(hideLength, str.length() - 2 * i);
+        String hideFlag = newStr(hideFlagChar, hideLength);
+        return replace(str, i, max, hideFlag);
+    }
+
+    /**
+     * 字符串中间部分隐藏，首尾默认最大显示4个字符<br>
+     * 默认4个字符以内的字符串都隐藏<br>
+     * 默认隐藏符号为 *
+     *
+     * @param str 需隐藏的字符串
+     * @return 隐藏完的字符串
+     */
+    public static String hide(String str) {
+        if (isEmpty(str)) {
+            return ComConstant.EMPTY_STR;
+        }
+        return hide(str, ComConstant.START, ComConstant.FOUR, str.length());
+    }
     // change end----------------------------------------------------
 
     // trim start----------------------------------------------------
@@ -631,4 +798,67 @@ public class StrUtil {
     }
 
     // join end -----------------------------------------------------
+
+    // other start --------------------------------------------------
+
+    /**
+     * 获取长度
+     *
+     * @param ch 字符序列
+     * @return 长度
+     */
+    public static int length(CharSequence ch) {
+        return isEmpty(ch) ? 0 : ch.length();
+    }
+
+    /**
+     * 生产指定字符，自定长度的字符串
+     *
+     * @param length 长度
+     * @param c      字符
+     * @return 字符串
+     */
+    public static String newStr(char c, int length) {
+        char[] chars = new char[length];
+        for (int i = 0; i < length; i++) {
+            chars[i] = c;
+        }
+        return new String(chars);
+    }
+
+    /**
+     * 字符串反转
+     * eg: "abcd" =&gt; "dcba"
+     *
+     * @param str 字符串
+     * @return 反转完的字符串
+     */
+    public static String reverse(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        return sb.reverse().toString();
+    }
+
+    /**
+     * 将字符串等分
+     *
+     * @param str       字符串
+     * @param divideLen 等分字符串长度
+     * @return 等分完的数组
+     */
+    public static String[] avgDivide(String str, int divideLen) {
+        if (isEmpty(str) || divideLen == 0) {
+            return new String[0];
+        }
+        int length = str.length();
+        if (length < divideLen) {
+            return new String[]{str};
+        }
+        int times = length % divideLen == 0 ? length / divideLen : length / divideLen + 1;
+        String[] arr = new String[times];
+        for (int i = 0; i < times; i++) {
+            int max = Math.min((i + 1) * divideLen, length);
+            arr[i] = str.substring(i * divideLen, max);
+        }
+        return arr;
+    }
 }
