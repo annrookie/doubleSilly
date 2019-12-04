@@ -146,4 +146,6 @@ public class ComConstant {
      * *
      */
     public static final char START = '*';
+
+    public static final char UNDERLINE = '_';
 }

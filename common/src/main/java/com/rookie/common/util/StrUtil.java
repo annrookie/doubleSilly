@@ -463,6 +463,44 @@ public class StrUtil {
         }
         return hide(str, ComConstant.START, ComConstant.FOUR, str.length());
     }
+
+    /**
+     * 下换线字符串拼接形式转为驼峰式
+     *
+     * @param str 需要进行转换的字符串
+     * @return 转换完的字符串
+     */
+    public static String underlineToHump(String str) {
+        if (isEmpty(str)) {
+            return ComConstant.EMPTY_STR;
+        }
+        String[] arr = str.split(String.valueOf(ComConstant.UNDERLINE));
+        arr[0] = arr[0].toLowerCase();
+        for (int i = 1; i < arr.length; i++) {
+            arr[i] = upperFirst(arr[i].toLowerCase());
+        }
+        return concat(arr);
+    }
+
+    /**
+     * 驼峰式转为下划线形式
+     *
+     * @param str 字符串
+     * @return 转换完的字符串
+     */
+    public static String humpToUnderline(String str) {
+        if (isEmpty(str)) {
+            return ComConstant.EMPTY_STR;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            if (CharUtil.isUpLetter(str.charAt(i))) {
+                sb.append(ComConstant.UNDERLINE);
+            }
+            sb.append(str.charAt(i));
+        }
+        return startWith(sb.toString(), "_") ? sb.toString().substring(1).toLowerCase() : sb.toString().toLowerCase();
+    }
     // change end----------------------------------------------------
 
     // trim start----------------------------------------------------

@@ -97,4 +97,15 @@ public class StrUtilTest {
     public void avgDivideTest() {
         System.out.println(Arrays.toString(StrUtil.avgDivide("abcd", 0)));
     }
+
+    @Test
+    public void underlineToHumpTest(){
+        System.out.println(StrUtil.underlineToHump("abc_dfDasdwead_fast"));
+        System.out.println(StrUtil.humpToUnderline(""));
+        System.out.println(StrUtil.humpToUnderline(null));
+        System.out.println(StrUtil.humpToUnderline("adsakjx123,142"));
+        System.out.println(StrUtil.humpToUnderline(">:@#!@"));
+        System.out.println(StrUtil.humpToUnderline("HelloWorld"));
+        System.out.println(StrUtil.humpToUnderline("HelloWoDSA"));
+    }
 }
