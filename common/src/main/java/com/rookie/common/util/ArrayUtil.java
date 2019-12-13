@@ -4,6 +4,7 @@ import com.rookie.common.constant.ArrayFilter;
 import com.rookie.common.constant.ComConstant;
 
 import java.lang.reflect.Array;
+import java.util.LinkedList;
 
 /**
  * 数组工具类
@@ -546,13 +547,29 @@ public class ArrayUtil {
         return null == obj ? null : obj.getClass().getComponentType();
     }
 
-    public static <T> T[] append(T[] arr, T... elements) {
-        if (isNotEmpty(arr)) {
-            return elements;
-        }
-        return arr;
+    /**
+     * 在数组末尾添加元素
+     *
+     * @param arr      数组
+     * @param elements 需要追加的元素或数字
+     * @param <T>      泛型
+     * @return 追加完的数组
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> Object[] append(T[] arr, T... elements) {
+        return insert(arr, arr.length, elements);
     }
 
+    /**
+     * 在数组中，插入元素或数组，返回Object数组
+     *
+     * @param arr     指定数组
+     * @param index   插入位置
+     * @param element 插入的元素或数组
+     * @param <T>     泛型
+     * @return 对象数组
+     */
+    @SuppressWarnings("unchecked")
     public static <T> Object[] insert(T[] arr, int index, T... element) {
         if (isEmpty(arr)) {
             return element;
