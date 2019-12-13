@@ -32,6 +32,28 @@ public class ArrayUtilTest {
     @Test
     public void joinTest() {
         Object[] i = {" ", null, 5};
-        System.out.println(ArrayUtil.join(i, ",", false, false, ArrayFilter.ALL));
+        System.out.println(ArrayUtil.join(i, ",", true, false, ArrayFilter.ALL));
+    }
+
+    @Test
+    public void hasNullTest(){
+        System.out.println(ArrayUtil.hasNull("ds","null"));
+    }
+
+    @Test
+    public void newArray(){
+        System.out.println(Arrays.toString(ArrayUtil.newArray(Integer.class, 2)));
+    }
+
+    @Test
+    public void getComponentTypeTest(){
+        System.out.println(ArrayUtil.getComponentType(new int[]{}));
+    }
+
+    @Test
+    public void insertTest(){
+        String[] strArr = new String[]{"abc","def","ghj","klm"};
+        Integer[] intArr = new Integer[]{123,345,456,678};
+        System.out.println(ArrayUtil.toString(ArrayUtil.insert(strArr,1,intArr)));
     }
 }

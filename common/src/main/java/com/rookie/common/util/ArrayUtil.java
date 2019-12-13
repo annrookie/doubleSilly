@@ -3,15 +3,20 @@ package com.rookie.common.util;
 import com.rookie.common.constant.ArrayFilter;
 import com.rookie.common.constant.ComConstant;
 
+import java.lang.reflect.Array;
+
 /**
  * 数组工具类
  *
  * @author hanhan
  * @version 1.0
+ * @date 2019/11/28
  */
 public class ArrayUtil {
 
     public static final int INDEX_NOT_FOUNT = -1;
+
+    // 常见判断-----------------------------------------------------------------------
 
     /**
      * 判断对象是否为数组
@@ -25,8 +30,6 @@ public class ArrayUtil {
         }
         return obj.getClass().isArray();
     }
-
-    // 判空-----------------------------------------------------------------------
 
     /**
      * 判断是否为空
@@ -153,6 +156,27 @@ public class ArrayUtil {
 
     public static boolean isNotEmpty(boolean[] arr) {
         return !isEmpty(arr);
+    }
+
+    /**
+     * 判断可变参数数组是否存在空白符
+     *
+     * @param arr 数组
+     * @param <T> 可变参数
+     * @return 是|否
+     */
+    public static <T> boolean hasNull(T... arr) {
+        if (arr == null) {
+            return true;
+        }
+        if (isNotEmpty(arr)) {
+            for (T t : arr) {
+                if (t == null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     // 拆装包------------------------------------------------------------
@@ -453,7 +477,7 @@ public class ArrayUtil {
     }
 
     /**
-     * 数字toString方法
+     * 数组toString方法
      *
      * @param arr 数组
      * @param <T> 泛型
@@ -498,4 +522,61 @@ public class ArrayUtil {
         }
         return rstObj;
     }
+
+    /**
+     * 创建指定类型的数组
+     *
+     * @param componentType 类型
+     * @param length        长度
+     * @param <T>           泛型
+     * @return 改类型数组
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T[] newArray(Class<?> componentType, int length) {
+        return (T[]) Array.newInstance(componentType, length);
+    }
+
+    /**
+     * 获取对象的类型
+     *
+     * @param obj 对象
+     * @return 对象的类型
+     */
+    public static Class<?> getComponentType(Object obj) {
+        return null == obj ? null : obj.getClass().getComponentType();
+    }
+
+    public static <T> T[] append(T[] arr, T... elements) {
+        if (isNotEmpty(arr)) {
+            return elements;
+        }
+        return arr;
+    }
+
+    public static <T> Object[] insert(T[] arr, int index, T... element) {
+        if (isEmpty(arr)) {
+            return element;
+        }
+        if (isEmpty(element)) {
+            return arr;
+        }
+        Object[] result = new Object[arr.length + element.length];
+        int arrSrc = 0, arrLength = arr.length,
+                eleSrc = arrLength, eleLength = element.length;
+        if (index <= 0) {
+            arrSrc = eleLength;
+            eleSrc = 0;
+        }
+        if (index > 0 && index < arr.length) {
+            arrLength = index;
+            eleSrc = index;
+        }
+        System.arraycopy(arr, 0, result, arrSrc, arrLength);
+        System.arraycopy(element, 0, result, eleSrc, eleLength);
+        if (index > 0 && index < arr.length) {
+            System.arraycopy(arr, index, result, index + eleLength, arr.length - index);
+        }
+        return result;
+    }
+    //
 }
