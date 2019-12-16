@@ -2,7 +2,6 @@ package com.rookie.common.util;
 
 import com.rookie.common.constant.ComConstant;
 import com.rookie.common.constant.Mode;
-import com.rookie.common.exception.UtilException;
 
 import java.util.UUID;
 
