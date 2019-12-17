@@ -157,7 +157,7 @@ public class StrUtil {
      * @param str 字符串
      * @return 是|否
      */
-    public static boolean isAllEmpty(String str) {
+    public static boolean isMAxEmpty(String str) {
         return isEmpty(str) || isUndefinedStr(str) || isBlank(str) || isNullStr(str);
     }
 
@@ -431,7 +431,7 @@ public class StrUtil {
      *
      * @param str          需隐藏的字符串
      * @param minLength    在此范围内（含）都被隐藏
-     * @param hideLength   隐藏符号长度，若加上首尾显示字符串长度&gt;字符串总长度，则为字符串总长度-首尾字符串长度
+     * @param hideLength   隐藏符号长度，若首尾显示字符串长度和&gt;字符串总长度，则隐藏符号长度为字符串总长度-首尾字符串长度和
      * @param hideFlagChar 隐藏符号
      * @return 隐藏后的字符串
      */

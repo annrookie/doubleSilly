@@ -2,9 +2,12 @@ package com.rookie.common.util;
 
 import com.rookie.common.constant.ArrayFilter;
 import com.rookie.common.constant.ComConstant;
+import com.rookie.common.filter.ComFilter;
+import com.rookie.common.filter.impl.FilterEmpty;
 
 import java.lang.reflect.Array;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 数组工具类
@@ -17,7 +20,7 @@ public class ArrayUtil {
 
     public static final int INDEX_NOT_FOUNT = -1;
 
-    // 常见判断-----------------------------------------------------------------------
+    // 常见判断start-------------------------------------------------------------------
 
     /**
      * 判断对象是否为数组
@@ -123,38 +126,92 @@ public class ArrayUtil {
         return null == arr || arr.length == 0;
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param t boolean数组
+     * @return true | false
+     */
     public static <T> boolean isNotEmpty(T[] t) {
         return !isEmpty(t);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(int[] arr) {
         return !isEmpty(arr);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(short[] arr) {
         return !isEmpty(arr);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(byte[] arr) {
         return !isEmpty(arr);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(long[] arr) {
         return !isEmpty(arr);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(float[] arr) {
         return !isEmpty(arr);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(double[] arr) {
         return !isEmpty(arr);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(char[] arr) {
         return !isEmpty(arr);
     }
 
+    /**
+     * 判断是否不为空
+     *
+     * @param arr boolean数组
+     * @return true | false
+     */
     public static boolean isNotEmpty(boolean[] arr) {
         return !isEmpty(arr);
     }
@@ -166,6 +223,7 @@ public class ArrayUtil {
      * @param <T> 可变参数
      * @return 是|否
      */
+    @SuppressWarnings("unchecked")
     public static <T> boolean hasNull(T... arr) {
         if (arr == null) {
             return true;
@@ -180,8 +238,16 @@ public class ArrayUtil {
         return false;
     }
 
-    // 拆装包------------------------------------------------------------
+    // 常见判断end -----------------------------------------------------
 
+    // 拆装包 start------------------------------------------------------
+
+    /**
+     * int数组装包
+     *
+     * @param arr int数组
+     * @return Integer数组
+     */
     public static Integer[] warp(int... arr) {
         if (null == arr) {
             return null;
@@ -195,6 +261,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * short数组装包
+     *
+     * @param arr short数组
+     * @return Short数组
+     */
     public static Short[] warp(short... arr) {
         if (null == arr) {
             return null;
@@ -208,6 +280,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * byte数组装包
+     *
+     * @param arr byte数组
+     * @return Byte数组
+     */
     public static Byte[] warp(byte... arr) {
         if (null == arr) {
             return null;
@@ -221,6 +299,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * long数组装包
+     *
+     * @param arr long数组
+     * @return Long数组
+     */
     public static Long[] warp(long... arr) {
         if (null == arr) {
             return null;
@@ -234,6 +318,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * float数组装包
+     *
+     * @param arr float数组
+     * @return Float数组
+     */
     public static Float[] warp(float... arr) {
         if (null == arr) {
             return null;
@@ -247,6 +337,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * double数组装包
+     *
+     * @param arr double数组
+     * @return Double数组
+     */
     public static Double[] warp(double... arr) {
         if (null == arr) {
             return null;
@@ -260,6 +356,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * char数组装包
+     *
+     * @param arr char数组
+     * @return Character数组
+     */
     public static Character[] warp(char... arr) {
         if (null == arr) {
             return null;
@@ -273,6 +375,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * boolean数组装包
+     *
+     * @param arr boolean数组
+     * @return Boolean数组
+     */
     public static Boolean[] warp(boolean... arr) {
         if (null == arr) {
             return null;
@@ -286,6 +394,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Integer数组拆包
+     *
+     * @param arr Integer数组
+     * @return int数组
+     */
     public static int[] unWarp(Integer... arr) {
         if (null == arr) {
             return null;
@@ -299,6 +413,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Byte数组拆包
+     *
+     * @param arr Byte数组
+     * @return byte数组
+     */
     public static byte[] unWarp(Byte... arr) {
         if (null == arr) {
             return null;
@@ -312,6 +432,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Short数组拆包
+     *
+     * @param arr Short数组
+     * @return short数组
+     */
     public static short[] unWarp(Short... arr) {
         if (null == arr) {
             return null;
@@ -325,6 +451,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Long数组拆包
+     *
+     * @param arr Long数组
+     * @return long数组
+     */
     public static long[] unWarp(Long... arr) {
         if (null == arr) {
             return null;
@@ -338,6 +470,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Character数组拆包
+     *
+     * @param arr Character数组
+     * @return char数组
+     */
     public static char[] unWarp(Character... arr) {
         if (null == arr) {
             return null;
@@ -351,6 +489,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Boolean数组拆包
+     *
+     * @param arr Boolean数组
+     * @return boolean数组
+     */
     public static boolean[] unWarp(Boolean... arr) {
         if (null == arr) {
             return null;
@@ -364,6 +508,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Float数组拆包
+     *
+     * @param arr Float数组
+     * @return float数组
+     */
     public static float[] unWarp(Float... arr) {
         if (null == arr) {
             return null;
@@ -377,6 +527,12 @@ public class ArrayUtil {
         return rst;
     }
 
+    /**
+     * Double数组拆包
+     *
+     * @param arr Double数组
+     * @return double数组
+     */
     public static double[] unWarp(Double... arr) {
         if (null == arr) {
             return null;
@@ -390,7 +546,9 @@ public class ArrayUtil {
         return rst;
     }
 
-    // 转为String[]数组------------------------------------------------
+    // 拆装包end -----------------------------------------------------
+
+    // 数组操作start---------------------------------------------------
 
     /**
      * 数组转为字符串数组
@@ -499,7 +657,7 @@ public class ArrayUtil {
     }
 
     /**
-     * 数组过滤级别
+     * 数组过滤空级别
      *
      * @param t           泛型参数
      * @param filterLevel 过滤级别
@@ -525,6 +683,41 @@ public class ArrayUtil {
     }
 
     /**
+     * 数组过滤
+     *
+     * @param <T>    泛型
+     * @param arr    需要过滤的数组
+     * @param filter 过滤方法接口
+     * @return 对象数组
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T[] filter(T[] arr, ComFilter filter) {
+        if (isEmpty(arr)) {
+            return newArray(arr, 0);
+        }
+        List<T> list = new ArrayList<>();
+        for (T t : arr) {
+            if (!filter.filter(t)) {
+                list.add(t);
+            }
+        }
+        T[] rst = newArray(arr, list.size());
+        return list.toArray(rst);
+    }
+
+    /**
+     * 数组过滤空
+     *
+     * @param arr 数组
+     * @param <T> 泛型
+     * @return 过滤完的数组
+     */
+    public static <T> T[] filterEmpty(T[] arr) {
+        return filter(arr, new FilterEmpty());
+    }
+
+
+    /**
      * 创建指定类型的数组
      *
      * @param componentType 类型
@@ -535,6 +728,19 @@ public class ArrayUtil {
     @SuppressWarnings("unchecked")
     public static <T> T[] newArray(Class<?> componentType, int length) {
         return (T[]) Array.newInstance(componentType, length);
+    }
+
+    /**
+     * 创建指定类型数组
+     *
+     * @param arr    泛型数组
+     * @param length 长度
+     * @param <T>    泛型
+     * @return 指定长度的类型数组
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T[] newArray(T[] arr, int length) {
+        return (T[]) Array.newInstance(getComponentType(arr), length);
     }
 
     /**
