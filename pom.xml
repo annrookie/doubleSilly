@@ -6,7 +6,7 @@
 
     <groupId>com.github.i2silly</groupId>
     <artifactId>DoubleSilly</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
     <name>i2silly</name>
     <description>Java简单工具类</description>
