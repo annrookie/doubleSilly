@@ -9,12 +9,12 @@
     <version>1.0.1</version>
     <packaging>pom</packaging>
     <name>i2silly</name>
-    <description>Java简单工具类</description>
+    <description>Java simple utils</description>
     <url>https://github.com/i2silly/doubleSilly</url>
 
     <modules>
-        <module>common</module>
-        <module>all</module>
+        <module>silly-all</module>
+        <module>silly-common</module>
     </modules>
 
     <properties>
