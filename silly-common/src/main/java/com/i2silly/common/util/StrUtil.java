@@ -1,7 +1,7 @@
 package com.i2silly.common.util;
 
 import com.i2silly.common.constant.ComConstant;
-import com.i2silly.common.constant.Mode;
+import com.i2silly.common.constant.ModeEnum;
 
 import java.util.UUID;
 
@@ -511,7 +511,7 @@ public class StrUtil {
      * @param mode 去除模式 TRIM_LEFT 左边| TRIM_RIGHT右边|TRIM_ALL 两边
      * @return 去除完的字符串
      */
-    public static String trim(String str, Mode mode) {
+    public static String trim(String str, ModeEnum mode) {
         if (isEmpty(str)) {
             return ComConstant.EMPTY_STR;
         }
@@ -540,7 +540,7 @@ public class StrUtil {
      * @return 去除完的字符
      */
     public static String trim(String str) {
-        return trim(str, Mode.TRIM_ALL);
+        return trim(str, ModeEnum.TRIM_ALL);
     }
 
     /**

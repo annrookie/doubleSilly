@@ -4,7 +4,7 @@ package com.i2silly.common.constant;
  * @author hanhan
  * @version 1.0
  */
-public enum Month {
+public enum MonthEnum {
     /**
      * 月份
      */
@@ -24,7 +24,7 @@ public enum Month {
     private String name;
     private int index;
 
-    private Month(String name, int index) {
+    private MonthEnum(String name, int index) {
         this.name = name;
         this.index = index;
     }

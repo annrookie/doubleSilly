@@ -1,4 +1,4 @@
-import com.i2silly.common.constant.ArrayFilter;
+import com.i2silly.common.constant.ArrayFilterEnum;
 import com.i2silly.common.util.ArrayUtil;
 import org.junit.Test;
 
@@ -33,7 +33,7 @@ public class ArrayUtilTest {
     @Test
     public void joinTest() {
         Object[] i = {" ", null, 5};
-        System.out.println(ArrayUtil.join(i, ",", true, false, ArrayFilter.ALL));
+        System.out.println(ArrayUtil.join(i, ",", true, false, ArrayFilterEnum.ALL));
     }
 
     @Test

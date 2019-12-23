@@ -1,6 +1,6 @@
 package com.i2silly.common.util;
 
-import com.i2silly.common.constant.CodeResult;
+import com.i2silly.common.constant.CodeResultEnum;
 import com.i2silly.common.exception.UtilException;
 
 import java.lang.reflect.Array;
@@ -62,7 +62,7 @@ public class CommonUtil {
      */
     public static String getCanonicalName(Object obj) {
         if (obj == null) {
-            throw new UtilException(CodeResult.NULL_FAIL);
+            throw new UtilException(CodeResultEnum.NULL_FAIL);
         }
         return obj.getClass().getCanonicalName();
     }

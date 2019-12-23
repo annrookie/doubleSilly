@@ -4,7 +4,7 @@ package com.i2silly.common.constant;
  * @author hanhan
  */
 
-public enum CodeResult {
+public enum CodeResultEnum {
 
     /**
      * 代码及结果定义
@@ -16,7 +16,7 @@ public enum CodeResult {
     private int code;
     private String text;
 
-    CodeResult(int code, String text) {
+    CodeResultEnum(int code, String text) {
         this.code = code;
         this.text = text;
     }

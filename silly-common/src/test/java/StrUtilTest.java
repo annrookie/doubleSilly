@@ -1,5 +1,5 @@
-import com.i2silly.common.constant.Mode;
-import com.i2silly.common.constant.Month;
+import com.i2silly.common.constant.ModeEnum;
+import com.i2silly.common.constant.MonthEnum;
 import com.i2silly.common.util.StrUtil;
 import org.junit.Test;
 
@@ -28,12 +28,12 @@ public class StrUtilTest {
         System.out.println(StrUtil.hasBlank(" 12312 4124    "));
         System.out.println(StrUtil.hasBlank("12adxcqw"));
         System.out.println(StrUtil.blankCharToStr(" 1 3213   24 12   45", "。"));
-        System.out.println(Month.Apr.ordinal());
+        System.out.println(MonthEnum.Apr.ordinal());
     }
 
     @Test
     public void trimTest() {
-        System.out.println(StrUtil.trim(" 123   1 ", Mode.TRIM_ALL));
+        System.out.println(StrUtil.trim(" 123   1 ", ModeEnum.TRIM_ALL));
     }
 
     @Test

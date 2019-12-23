@@ -6,7 +6,7 @@ package com.i2silly.common.constant;
  * @author hanhan
  */
 
-public enum ArrayFilter {
+public enum ArrayFilterEnum {
 
     /**
      * 不过滤

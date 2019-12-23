@@ -5,7 +5,7 @@ package com.i2silly.common.constant;
  * @version 1.0
  */
 
-public enum Week {
+public enum WeekEnum {
     /**
      * 星期
      */
@@ -20,7 +20,7 @@ public enum Week {
     private String name;
     private int index;
 
-    Week(String name, int index) {
+    WeekEnum(String name, int index) {
         this.name = name;
         this.index = index;
     }

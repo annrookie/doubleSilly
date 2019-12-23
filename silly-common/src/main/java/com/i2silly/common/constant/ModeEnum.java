@@ -4,7 +4,7 @@ package com.i2silly.common.constant;
  * @author hanhan
  */
 
-public enum Mode {
+public enum ModeEnum {
     /**
      * 模式
      */
@@ -14,7 +14,7 @@ public enum Mode {
 
     private int mode;
 
-    Mode(int mode){
+    ModeEnum(int mode){
         this.mode = mode;
     }
 

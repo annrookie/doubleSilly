@@ -1,6 +1,6 @@
 package com.i2silly.common.util;
 
-import com.i2silly.common.constant.ArrayFilter;
+import com.i2silly.common.constant.ArrayFilterEnum;
 import com.i2silly.common.constant.ComConstant;
 import com.i2silly.common.filter.ComFilter;
 import com.i2silly.common.filter.impl.FilterEmpty;
@@ -582,7 +582,7 @@ public class ArrayUtil {
      * @param <T>          泛型数组
      * @return 拼接完的字符串
      */
-    public static <T> String join(T[] arr, String format, boolean isAddBracket, boolean isAddSpace, ArrayFilter filter) {
+    public static <T> String join(T[] arr, String format, boolean isAddBracket, boolean isAddSpace, ArrayFilterEnum filter) {
         if (isEmpty(arr)) {
             return ComConstant.EMPTY_STR;
         }
@@ -619,7 +619,7 @@ public class ArrayUtil {
      * @return 字符串
      */
     public static <T> String join(T[] arr) {
-        return join(arr, ComConstant.COMMA, true, true, ArrayFilter.NONE);
+        return join(arr, ComConstant.COMMA, true, true, ArrayFilterEnum.NONE);
     }
 
     /**
@@ -631,7 +631,7 @@ public class ArrayUtil {
      * @param <T>    泛型
      * @return 拼接完的字符串
      */
-    public static <T> String join(T[] arr, String format, ArrayFilter filter) {
+    public static <T> String join(T[] arr, String format, ArrayFilterEnum filter) {
         return join(arr, format, true, true, filter);
     }
 
@@ -664,7 +664,7 @@ public class ArrayUtil {
      * @param <T>         泛型
      * @return 对象
      */
-    private static <T> Object filterParam(T t, ArrayFilter filterLevel) {
+    private static <T> Object filterParam(T t, ArrayFilterEnum filterLevel) {
         Object rstObj;
         switch (filterLevel) {
             case EMPTY:
