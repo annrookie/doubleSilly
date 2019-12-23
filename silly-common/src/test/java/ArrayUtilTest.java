@@ -49,11 +49,14 @@ public class ArrayUtilTest {
     @Test
     public void getComponentTypeTest() {
         System.out.println(ArrayUtil.getComponentType(new int[]{}));
+        System.out.println("---------");
+        System.out.println(ArrayUtil.getComponentType(String[].class));
     }
 
     @Test
     public void insertTest() {
         String[] strArr = new String[]{"abc", "def", "ghj", "klm"};
+        String[] strArr2 = new String[]{"abc", "def", "ghj", "klm"};
         Integer[] intArr = new Integer[]{123, 345, 456, 678};
         System.out.println(ArrayUtil.toString(ArrayUtil.insert(strArr, 1, intArr)));
     }
@@ -64,5 +67,27 @@ public class ArrayUtilTest {
 
         String[] filters = ArrayUtil.filterEmpty(strArr);
         System.out.println(ArrayUtil.toString(filters));
+    }
+
+    @Test
+    public void replaceOrAppendTest() {
+        String[] strArr = new String[]{"abc", "def", "ghj", "klm"};
+        String[] strArr2 = new String[]{"abc", "def", "ghj", "klm"};
+        Integer[] intArr = new Integer[]{123, 345, 456, 678};
+        System.out.println(ArrayUtil.toString(ArrayUtil.replaceOrAppend(strArr, 2, intArr)));
+    }
+
+    @Test
+    public void addAllTest() {
+        String[] strArr = new String[]{"abc", "def", "ghj", "klm"};
+        Integer[] strArr2 = new Integer[]{123};
+        System.out.println((Arrays.toString(ArrayUtil.addAll(strArr, strArr2))));
+    }
+
+    @Test
+    public void mergeTest() {
+        String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
+        Integer[] strArr2 = new Integer[]{123,523,6546,9897};
+        System.out.println(ArrayUtil.merge(strArr,strArr2,true));
     }
 }

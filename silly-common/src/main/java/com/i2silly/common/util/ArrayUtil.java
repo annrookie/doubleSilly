@@ -6,8 +6,7 @@ import com.i2silly.common.filter.ComFilter;
 import com.i2silly.common.filter.impl.FilterEmpty;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 数组工具类
@@ -623,7 +622,7 @@ public class ArrayUtil {
     }
 
     /**
-     * 拼接字符串
+     * 拼接数组
      *
      * @param arr    数组
      * @param format 拼接字符
@@ -744,13 +743,23 @@ public class ArrayUtil {
     }
 
     /**
-     * 获取对象的类型
+     * 获取对象的类型，不是数组返回null
      *
      * @param obj 对象
      * @return 对象的类型
      */
     public static Class<?> getComponentType(Object obj) {
         return null == obj ? null : obj.getClass().getComponentType();
+    }
+
+    /**
+     * 获取数组元素类型,不是数组返回null
+     *
+     * @param arrClass 数组类
+     * @return 数组元素类型
+     */
+    public static Class<?> getComponentType(Class<?> arrClass) {
+        return null == arrClass ? null : arrClass.getComponentType();
     }
 
     /**
@@ -767,7 +776,8 @@ public class ArrayUtil {
     }
 
     /**
-     * 在数组中，插入元素或数组，返回Object数组
+     * 在数组中，插入元素或数组，返回Object数组<br>
+     * 可通过getClass()获取初始类型
      *
      * @param arr     指定数组
      * @param index   插入位置
@@ -775,7 +785,7 @@ public class ArrayUtil {
      * @param <T>     泛型
      * @return 对象数组
      */
-    @SuppressWarnings("unchecked")
+    @SafeVarargs
     public static <T> Object[] insert(T[] arr, int index, T... element) {
         if (isEmpty(arr)) {
             return element;
@@ -783,7 +793,12 @@ public class ArrayUtil {
         if (isEmpty(element)) {
             return arr;
         }
-        Object[] result = new Object[arr.length + element.length];
+        Object[] result;
+        if (getComponentType(arr) == getComponentType(element)) {
+            result = newArray(getComponentType(arr), arr.length + element.length);
+        } else {
+            result = new Object[arr.length + element.length];
+        }
         int arrSrc = 0, arrLength = arr.length,
                 eleSrc = arrLength, eleLength = element.length;
         if (index <= 0) {
@@ -800,6 +815,126 @@ public class ArrayUtil {
             System.arraycopy(arr, index, result, index + eleLength, arr.length - index);
         }
         return result;
+    }
+
+    /**
+     * 数组替换或者追加<br>
+     * 源数组长度小于索引长度，则追加数组<br>
+     * 源数组长度大于索引长度，则进行替换
+     *
+     * @param arr     源数组
+     * @param index   起始索引
+     * @param element 追加可变参
+     * @param <T>     泛型
+     * @return 追加或替换完的数组【Object数组】
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> Object[] replaceOrAppend(T[] arr, int index, T... element) {
+        if (isEmpty(arr) || index <= 0) {
+            return element;
+        }
+        if (isEmpty(element)) {
+            return arr;
+        }
+        if (index < arr.length) {
+            Object[] obj = new Object[index + element.length];
+            System.arraycopy(arr, 0, obj, 0, index);
+            System.arraycopy(element, 0, obj, index, element.length);
+            return obj;
+        }
+        return append(arr, element);
+    }
+
+    /**
+     * 添加所有数组<br>
+     * 同一类型数据可强制转换为该类型数组，若不是则返回Object数组类型
+     * 自动过滤空
+     *
+     * @param arrays 泛型数组
+     * @param <T>    泛型
+     * @return 合并后的数组
+     */
+    @SafeVarargs
+    public static <T> Object[] addAll(T[]... arrays) {
+        if (arrays == null) {
+            return newArray(Object.class, 0);
+        }
+        // 只有一个数组直接返回
+        if (arrays.length == 1) {
+            return arrays[0];
+        }
+        // 同一类型数组标识
+        boolean flag = true;
+        // 获取首个数组的类型
+        Class<?> type = getComponentType(arrays[0]);
+        int length = 0;
+        for (T[] array : arrays) {
+            if (isNotEmpty(array)) {
+                length += array.length;
+                // 判断是否含有其他类型的数组【与首个数组类型不一致】，则生成Object数组
+                if (type != getComponentType(array)) {
+                    flag = false;
+                }
+            }
+        }
+        Object[] rst;
+        if (flag) {
+            rst = newArray(type, length);
+        } else {
+            rst = newArray(Object.class, length);
+        }
+        int srcLength = 0;
+        for (T[] array : arrays) {
+            if (isNotEmpty(array)) {
+                System.arraycopy(array, 0, rst, srcLength, array.length);
+                srcLength += array.length;
+            }
+        }
+        return rst;
+    }
+
+    /**
+     * 将两个数组合并为键值对形式<br>
+     * 若数组长度不一致，取最短<br>
+     * 若键数组或值数组为空，则返回空
+     *
+     * @param key    键数组
+     * @param value  值数组
+     * @param isSort 是否有序
+     * @param <K>    键泛型
+     * @param <V>    值泛型
+     * @return 键值对
+     */
+    public static <K, V> Map<K, V> merge(K[] key, V[] value, boolean isSort) {
+        if (isEmpty(key) || isEmpty(value)) {
+            return null;
+        }
+        Map<K, V> map;
+        if (isSort) {
+            map = new LinkedHashMap<>();
+        } else {
+            map = new HashMap<>();
+        }
+        int size = Math.min(key.length, value.length);
+        for (int i = 0; i < size; i++) {
+            map.put(key[i], value[i]);
+        }
+        return map;
+    }
+
+    /**
+     * 将两个数组合并为键值对形式<br>
+     * 若数组长度不一致，取最短<br>
+     * 若键数组或值数组为空，则返回空
+     *
+     * @param key   键数组
+     * @param value 值数组
+     * @param <K>   键泛型
+     * @param <V>   值泛型
+     * @return 键值对
+     */
+    public static <K, V> Map<K, V> merge(K[] key, V[] value) {
+        return merge(key, value, false);
     }
     //
 }
