@@ -696,7 +696,7 @@ public class ArrayUtil {
         }
         List<T> list = new ArrayList<>();
         for (T t : arr) {
-            if (!filter.filter(t)) {
+            if (filter.filter(t)) {
                 list.add(t);
             }
         }

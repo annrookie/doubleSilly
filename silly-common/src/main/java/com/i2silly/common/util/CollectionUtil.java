@@ -1,6 +1,9 @@
 package com.i2silly.common.util;
 
+import com.i2silly.common.constant.CodeResultEnum;
 import com.i2silly.common.constant.ComConstant;
+import com.i2silly.common.exception.UtilException;
+import jdk.nashorn.internal.ir.CallNode;
 
 import java.util.*;
 
@@ -89,6 +92,47 @@ public class CollectionUtil {
         return distinct(add(a, b));
     }
 
+    /**
+     * 将List &gt;Map&lt; 根据Map中的键进行分组
+     *
+     * @param list 需要分组的list
+     * @param keys 分组的键
+     * @param <V>  值泛型
+     * @return 分完组的Map
+     */
+    public static <V> Map<String, List<Map<String, V>>> listDivide(List<Map<String, V>> list, String... keys) {
+        if (isEmpty(list)) {
+            return null;
+        }
+        Map<String, List<Map<String, V>>> rstMap = new HashMap<>();
+        if (keys == null || keys.length < 1) {
+            rstMap.put("default", list);
+            return rstMap;
+        }
+        List<Map<String, V>> ml;
+        for (Map<String, V> map : list) {
+            StringBuilder sb = new StringBuilder();
+            for (String key : keys) {
+                if (null != map.get(key)){
+                    sb.append(map.get(key));
+                }
+            }
+            String k;
+            if (sb.length() < 1) {
+                k = "empty";
+            } else {
+                k = sb.toString();
+            }
+            if (rstMap.get(k) == null) {
+                ml = new ArrayList<>();
+            } else {
+                ml = rstMap.get(k);
+            }
+            ml.add(map);
+            rstMap.put(k, ml);
+        }
+        return rstMap;
+    }
     // list集合操作end
     //------------------------------------------------------------------------
     //set 集合操作start

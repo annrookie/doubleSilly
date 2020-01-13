@@ -10,6 +10,7 @@ import com.i2silly.common.constant.CodeResultEnum;
  */
 public class UtilException extends RuntimeException {
 
+
     public UtilException() {
         super();
     }
@@ -18,8 +19,9 @@ public class UtilException extends RuntimeException {
         super(message);
     }
 
-    public UtilException(CodeResultEnum rst) {
-        String message = "异常代码【" + rst.getCode() + "】," + "异常信息【" + rst.getText() + "】";
-        throw new UtilException(message);
+
+    public UtilException(CodeResultEnum codeResultEnum) {
+        this(codeResultEnum.getText());
     }
+
 }

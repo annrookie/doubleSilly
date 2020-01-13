@@ -9,9 +9,12 @@ public enum CodeResultEnum {
     /**
      * 代码及结果定义
      */
-    NULL_FAIL(10000, "参数不能为空"),
-    FAIL(0, "返回错误"),
-    SUCCESS(1, "返回成功");
+    NULL_FAILURE(10001, "参数不能为空"),
+
+    UNKNOWN_FAILURE(10002, "未知错误"),
+
+    MISMATCH_FAILURE(10003, "参数不匹配");
+
 
     private int code;
     private String text;
@@ -27,13 +30,5 @@ public enum CodeResultEnum {
 
     public String getText() {
         return text;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }

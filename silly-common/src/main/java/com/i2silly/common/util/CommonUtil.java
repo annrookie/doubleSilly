@@ -62,7 +62,7 @@ public class CommonUtil {
      */
     public static String getCanonicalName(Object obj) {
         if (obj == null) {
-            throw new UtilException(CodeResultEnum.NULL_FAIL);
+            throw new UtilException(CodeResultEnum.NULL_FAILURE);
         }
         return obj.getClass().getCanonicalName();
     }

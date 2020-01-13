@@ -20,6 +20,6 @@ public class FilterEmpty<T> implements ComFilter<T> {
      */
     @Override
     public boolean filter(T o) {
-        return CommonUtil.isEmpty(o);
+        return CommonUtil.isNotEmpty(o);
     }
 }

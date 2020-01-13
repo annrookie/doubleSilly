@@ -33,7 +33,7 @@ public class ArrayUtilTest {
     @Test
     public void joinTest() {
         Object[] i = {" ", null, 5};
-        System.out.println(ArrayUtil.join(i, ",", true, false, ArrayFilterEnum.ALL));
+        System.out.println(ArrayUtil.join(i, ",", true, false, ArrayFilterEnum.NONE));
     }
 
     @Test

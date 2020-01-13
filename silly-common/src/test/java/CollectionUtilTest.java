@@ -3,9 +3,7 @@ import com.i2silly.common.util.NewUtil;
 import com.i2silly.common.util.RandomUtil;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CollectionUtilTest {
 
@@ -83,11 +81,37 @@ public class CollectionUtilTest {
         List<String> list = RandomUtil.randomList(3);
         long startTime = System.currentTimeMillis();
         System.out.println("执行代码块/方法");
-        String s = CollectionUtil.join(list, "","","---");
+        String s = CollectionUtil.join(list, "", "", "---");
         System.out.println(s);
         HashSet<String> set = new HashSet<>(RandomUtil.randomList(5));
         System.out.println(set);
         long endTime = System.currentTimeMillis();
         System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
+    }
+
+    @Test
+    public void ListDivide() {
+        List<Map<String,Object>> list = new ArrayList<>();
+        Map<String,Object> map1 = new HashMap<>();
+        map1.put("id",123);
+        map1.put("name","张三");
+        Map<String,Object> map2 = new HashMap<>();
+        map2.put("id",234);
+        map2.put("name","李四");
+        Map<String,Object> map3 = new HashMap<>();
+        map3.put("id",123);
+        map3.put("name","王五");
+        list.add(map1);
+        list.add(map2);
+        list.add(map3);
+        Map<String, List<Map<String, Object>>> map = CollectionUtil.listDivide(list,"name");
+
+        if (map != null){
+            Set<String> keySet = map.keySet();
+            for (String s : keySet) {
+                System.out.println(map.get(s));
+                System.out.println("============");
+            }
+        }
     }
 }
