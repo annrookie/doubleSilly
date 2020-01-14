@@ -555,7 +555,7 @@ public class ArrayUtil {
      * @param obj 对象数组
      * @return 字符串数组
      */
-    public static String[] toStringArr(Object... obj) {
+    public static String[] toStringArr(Object[] obj) {
         if (null == obj) {
             return null;
         }
@@ -569,8 +569,6 @@ public class ArrayUtil {
         }
         return rst;
     }
-
-    //TODO 待修改
 
     /**
      * 拼接数组
@@ -933,6 +931,102 @@ public class ArrayUtil {
 
     // 映射键值对end----------------------------
 
+    // index操作start
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static <T> int indexOf(T[] array, Object val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 元素是否存在数组中，忽略大小写
+     *
+     * @param array 数组
+     * @param val   元素
+     * @param <T>   泛型
+     * @return 索引
+     */
+    public static <T> int indexOfIgnoreCase(T[] array, Object val) {
+        if (null != array && array.length > 0) {
+            boolean b;
+            for (int i = 0; i < array.length; i++) {
+                if (array[i] != null && val != null) {
+                    b = array[i].toString().equalsIgnoreCase(val.toString());
+                } else {
+                    b = array[i] == val;
+                }
+                if (b) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @param <T>   泛型
+     * @return 索引
+     */
+    public static <T> int lastIndexOf(T[] array, Object val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @param <T>   泛型
+     * @return 是|否
+     */
+    public static <T> boolean contains(T[] array, Object val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含值数组
+     *
+     * @param array 数组
+     * @param vals  被包含的数组
+     * @param <T>   泛型
+     * @return 是|否
+     */
+    public static <T> boolean containsAll(T[] array, Object[] vals) {
+        if (null == array || vals == null) {
+            return false;
+        }
+        for (Object val : vals) {
+            if (indexOf(array, val) == INDEX_NOT_FOUNT) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // index操作end
 
     // 数组操作end -----------------------------
 }

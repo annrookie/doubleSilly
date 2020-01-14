@@ -36,12 +36,12 @@ public class ArrayUtilTest {
     public void joinTest() {
         Integer[] i = {null, 5, 5};
         System.out.println(ArrayUtil.join(i, ",", true, false, new FilterEmpty()));
-        System.out.println(ArrayUtil.join(i,"-",new FilterEmpty()));
+        System.out.println(ArrayUtil.join(i, "-", new FilterEmpty()));
     }
 
     @Test
     public void hasNullTest() {
-        System.out.println(ArrayUtil.hasNull(new String(), "null"));
+        System.out.println(ArrayUtil.hasNull("", "null"));
     }
 
     @Test
@@ -90,8 +90,18 @@ public class ArrayUtilTest {
     @Test
     public void mergeTest() {
         String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
-        Integer[] strArr2 = new Integer[]{123,523,6546,9897};
-        System.out.println(ArrayUtil.merge(strArr,strArr2,true));
+        Integer[] strArr2 = new Integer[]{123, 523, 6546, 9897};
+        System.out.println(ArrayUtil.merge(strArr, strArr2, true));
     }
 
+    @Test
+    public void indexOfTest() {
+        String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
+        String[] strArr2 = new String[]{"abc", "ghj", "def"};
+        System.out.println(ArrayUtil.indexOf(strArr,"Abc"));
+        System.out.println(ArrayUtil.indexOfIgnoreCase(strArr,new User()));
+        System.out.println(ArrayUtil.lastIndexOf(strArr,"def"));
+        System.out.println(ArrayUtil.contains(strArr,"ghj"));
+        System.out.println(ArrayUtil.containsAll(strArr,strArr2));
+    }
 }
