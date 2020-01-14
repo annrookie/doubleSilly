@@ -91,27 +91,38 @@ public class CollectionUtilTest {
 
     @Test
     public void ListDivide() {
-        List<Map<String,Object>> list = new ArrayList<>();
-        Map<String,Object> map1 = new HashMap<>();
-        map1.put("id",123);
-        map1.put("name","张三");
-        Map<String,Object> map2 = new HashMap<>();
-        map2.put("id",234);
-        map2.put("name","李四");
-        Map<String,Object> map3 = new HashMap<>();
-        map3.put("id",123);
-        map3.put("name","王五");
+        List<Map<String, Object>> list = new ArrayList<>();
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("id", 123);
+        map1.put("name", "张三");
+        Map<String, Object> map2 = new HashMap<>();
+        map2.put("id", 234);
+        map2.put("name", "李四");
+        Map<String, Object> map3 = new HashMap<>();
+        map3.put("id", 123);
+        map3.put("name", "王五");
         list.add(map1);
         list.add(map2);
         list.add(map3);
-        Map<String, List<Map<String, Object>>> map = CollectionUtil.listDivide(list,"name");
+        Map<String, List<Map<String, Object>>> map = CollectionUtil.listDivide(list, "id","name");
 
-        if (map != null){
+        if (map != null) {
             Set<String> keySet = map.keySet();
             for (String s : keySet) {
                 System.out.println(map.get(s));
                 System.out.println("============");
             }
         }
+    }
+
+    @Test
+    public void listBeanDivide() {
+        User user1 = new User("hhh",13,"男",318);
+        User user2 = new User("xxx",13,"女",21);
+        List<User> list = new ArrayList<>();
+        list.add(user1);
+        list.add(user2);
+        Map<String, List<User>> name = CollectionUtil.listBeanDivide(list, "id");
+        System.out.println(name);
     }
 }

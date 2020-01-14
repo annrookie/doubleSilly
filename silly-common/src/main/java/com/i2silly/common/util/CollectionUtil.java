@@ -5,6 +5,7 @@ import com.i2silly.common.constant.ComConstant;
 import com.i2silly.common.exception.UtilException;
 import jdk.nashorn.internal.ir.CallNode;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -113,25 +114,70 @@ public class CollectionUtil {
         for (Map<String, V> map : list) {
             StringBuilder sb = new StringBuilder();
             for (String key : keys) {
-                if (null != map.get(key)){
+                if (null != map.get(key)) {
                     sb.append(map.get(key));
                 }
             }
-            String k;
-            if (sb.length() < 1) {
-                k = "empty";
-            } else {
-                k = sb.toString();
-            }
-            if (rstMap.get(k) == null) {
-                ml = new ArrayList<>();
-            } else {
-                ml = rstMap.get(k);
-            }
+            String k = CommonUtil.isEmpty(sb) ? "empty" : sb.toString();
+            ml = rstMap.get(k) == null ? new ArrayList<>() : rstMap.get(k);
             ml.add(map);
             rstMap.put(k, ml);
         }
         return rstMap;
+    }
+
+    /**
+     * 将ListBean 根据javaBean中的属性进行分组
+     *
+     * @param listBean 需要分组的list
+     * @param keys     分组的键
+     * @param <T>      javaBean
+     * @return 分完组的Map
+     */
+    public static <T> Map<String, List<T>> listBeanDivide(List<T> listBean, String... keys) {
+        if (isEmpty(listBean)) {
+            throw new UtilException(CodeResultEnum.NULL_FAILURE);
+        }
+        T t = listBean.get(0);
+        Field[] fields = t.getClass().getDeclaredFields();
+        if (CommonUtil.isEmpty(fields)) {
+            throw new UtilException(CodeResultEnum.PARAM_FAILURE);
+        }
+        Set<String> set = new HashSet<>();
+        Map<String, Field> fieldMap = new HashMap<>();
+        for (Field field : fields) {
+            set.add(field.getName());
+            fieldMap.put(field.getName(), field);
+        }
+        for (String key : keys) {
+            if (!set.contains(key)) {
+                throw new UtilException(CodeResultEnum.PARAM_FAILURE);
+            }
+        }
+        Map<String, List<T>> rstMap = new HashMap<>();
+        if (keys.length < 1) {
+            rstMap.put("default", listBean);
+            return rstMap;
+        }
+        try {
+            List<T> ml;
+            for (T javaBean : listBean) {
+                StringBuilder sb = new StringBuilder();
+                for (String key : keys) {
+                    Field field = fieldMap.get(key);
+                    field.setAccessible(true);
+                    Object o = field.get(javaBean);
+                    sb.append(o);
+                }
+                String k = CommonUtil.isEmpty(sb) ? "empty" : sb.toString();
+                ml = rstMap.get(k) == null ? new ArrayList<>() : rstMap.get(k);
+                ml.add(javaBean);
+                rstMap.put(k, ml);
+            }
+            return rstMap;
+        } catch (IllegalAccessException e) {
+            throw new UtilException(CodeResultEnum.UNKNOWN_FAILURE);
+        }
     }
     // list集合操作end
     //------------------------------------------------------------------------

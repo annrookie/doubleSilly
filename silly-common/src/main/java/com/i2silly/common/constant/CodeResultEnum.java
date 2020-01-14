@@ -13,6 +13,8 @@ public enum CodeResultEnum {
 
     UNKNOWN_FAILURE(10002, "未知错误"),
 
+    PARAM_FAILURE(10004,"参数错误"),
+
     MISMATCH_FAILURE(10003, "参数不匹配");
 
 

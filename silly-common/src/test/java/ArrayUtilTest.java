@@ -1,7 +1,9 @@
 import com.i2silly.common.constant.ArrayFilterEnum;
+import com.i2silly.common.filter.impl.FilterEmpty;
 import com.i2silly.common.util.ArrayUtil;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,8 +34,9 @@ public class ArrayUtilTest {
 
     @Test
     public void joinTest() {
-        Object[] i = {" ", null, 5};
-        System.out.println(ArrayUtil.join(i, ",", true, false, ArrayFilterEnum.NONE));
+        Integer[] i = {null, 5, 5};
+        System.out.println(ArrayUtil.join(i, ",", true, false, new FilterEmpty()));
+        System.out.println(ArrayUtil.join(i,"-",new FilterEmpty()));
     }
 
     @Test
@@ -90,4 +93,5 @@ public class ArrayUtilTest {
         Integer[] strArr2 = new Integer[]{123,523,6546,9897};
         System.out.println(ArrayUtil.merge(strArr,strArr2,true));
     }
+
 }

@@ -570,6 +570,8 @@ public class ArrayUtil {
         return rst;
     }
 
+    //TODO 待修改
+
     /**
      * 拼接数组
      *
@@ -578,47 +580,51 @@ public class ArrayUtil {
      * @param isAddBracket 是否添加[]
      * @param isAddSpace   是否带空格
      * @param filter       过滤条件
-     * @param <T>          泛型数组
      * @return 拼接完的字符串
      */
-    public static <T> String join(T[] arr, String format, boolean isAddBracket, boolean isAddSpace, ArrayFilterEnum filter) {
+    @SuppressWarnings("unchecked")
+    public static String join(Object[] arr, String format, boolean isAddBracket, boolean isAddSpace, ComFilter filter) {
         if (isEmpty(arr)) {
             return ComConstant.EMPTY_STR;
         }
-        Object firstParam = filterParam(arr[0], filter);
         StringBuilder sb = new StringBuilder();
         // 是否添加括号
         if (isAddBracket) {
             sb.append(ComConstant.LEFT_BRACKET);
         }
-        sb.append(firstParam);
         if (arr.length > 1) {
             for (int i = 1; i < arr.length; i++) {
-                sb.append(format);
+                if (filter.filter(arr[i])) {
+                    sb.append(arr[i]);
+                    sb.append(format);
+                }
                 // 是否添加空格
                 if (isAddSpace) {
                     sb.append(ComConstant.SPACE);
                 }
-                // 过滤
-                sb.append(filterParam(arr[i], filter));
             }
+        }
+        String str;
+        if (isAddSpace) {
+            str = sb.substring(0, sb.length() - 2);
+        } else {
+            str = sb.substring(0, sb.length() - 1);
         }
         // 是否添加括号
         if (isAddBracket) {
-            sb.append(ComConstant.RIGHT_BRACKET);
+            str += ComConstant.RIGHT_BRACKET;
         }
-        return sb.toString();
+        return str;
     }
 
     /**
      * 拼接数组
      *
      * @param arr 数组
-     * @param <T> 泛型
      * @return 字符串
      */
-    public static <T> String join(T[] arr) {
-        return join(arr, ComConstant.COMMA, true, true, ArrayFilterEnum.NONE);
+    public static String join(Object[] arr) {
+        return join(arr, ComConstant.COMMA, true, true, new FilterEmpty());
     }
 
     /**
@@ -626,13 +632,13 @@ public class ArrayUtil {
      *
      * @param arr    数组
      * @param format 拼接字符
-     * @param filter 过滤[NONE,EMPTY,BLANK,ALL]
-     * @param <T>    泛型
+     * @param filter 过滤
      * @return 拼接完的字符串
      */
-    public static <T> String join(T[] arr, String format, ArrayFilterEnum filter) {
+    public static String join(Object[] arr, String format, ComFilter filter) {
         return join(arr, format, true, true, filter);
     }
+
 
     /**
      * 数组toString方法
@@ -655,31 +661,8 @@ public class ArrayUtil {
         return sb.toString();
     }
 
-    /**
-     * 数组过滤空级别
-     *
-     * @param t           泛型参数
-     * @param filterLevel 过滤级别
-     * @param <T>         泛型
-     * @return 对象
-     */
-    private static <T> Object filterParam(T t, ArrayFilterEnum filterLevel) {
-        Object rstObj;
-        switch (filterLevel) {
-            case EMPTY:
-                rstObj = CommonUtil.isEmpty(t) ? ComConstant.EMPTY_STR : t;
-                break;
-            case BLANK:
-                rstObj = StrUtil.isBlank(t.toString()) ? ComConstant.EMPTY_STR : t;
-                break;
-            case ALL:
-                rstObj = (CommonUtil.isEmpty(t) || StrUtil.isBlank(t.toString())) ? ComConstant.EMPTY_STR : t;
-                break;
-            default:
-                rstObj = t;
-        }
-        return rstObj;
-    }
+    // 过滤start------------------------
+
 
     /**
      * 数组过滤
@@ -715,6 +698,8 @@ public class ArrayUtil {
         return filter(arr, new FilterEmpty());
     }
 
+    // 过滤end------------------------
+    // 创建新数组start------------------------
 
     /**
      * 创建指定类型的数组
@@ -742,6 +727,9 @@ public class ArrayUtil {
         return (T[]) Array.newInstance(getComponentType(arr), length);
     }
 
+    // 创建新数组end------------------------
+    // 获取数组类型start------------------------
+
     /**
      * 获取对象的类型，不是数组返回null
      *
@@ -761,6 +749,10 @@ public class ArrayUtil {
     public static Class<?> getComponentType(Class<?> arrClass) {
         return null == arrClass ? null : arrClass.getComponentType();
     }
+
+
+    // 获取数组类型end------------------------
+    // 追加、添加所有、添加或更新所有数组start------------------------
 
     /**
      * 在数组末尾添加元素
@@ -892,6 +884,8 @@ public class ArrayUtil {
         }
         return rst;
     }
+    // 追加、添加所有、添加或更新所有数组end------------------------
+    // 映射键值对start--------------------------
 
     /**
      * 将两个数组合并为键值对形式<br>
@@ -936,5 +930,9 @@ public class ArrayUtil {
     public static <K, V> Map<K, V> merge(K[] key, V[] value) {
         return merge(key, value, false);
     }
-    //
+
+    // 映射键值对end----------------------------
+
+
+    // 数组操作end -----------------------------
 }
