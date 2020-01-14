@@ -15,6 +15,8 @@ public enum CodeResultEnum {
 
     PARAM_FAILURE(10004,"参数错误"),
 
+    INDEX_OUT_BOUND(10005,"索引超出数组边界"),
+
     MISMATCH_FAILURE(10003, "参数不匹配");
 
 

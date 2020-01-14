@@ -1,7 +1,9 @@
 package com.i2silly.common.util;
 
 import com.i2silly.common.constant.ArrayFilterEnum;
+import com.i2silly.common.constant.CodeResultEnum;
 import com.i2silly.common.constant.ComConstant;
+import com.i2silly.common.exception.UtilException;
 import com.i2silly.common.filter.ComFilter;
 import com.i2silly.common.filter.impl.FilterEmpty;
 
@@ -590,10 +592,10 @@ public class ArrayUtil {
         if (isAddBracket) {
             sb.append(ComConstant.LEFT_BRACKET);
         }
-        if (arr.length > 1) {
-            for (int i = 1; i < arr.length; i++) {
-                if (filter.filter(arr[i])) {
-                    sb.append(arr[i]);
+        if (arr.length > 0) {
+            for (Object o : arr) {
+                if (filter.filter(o)) {
+                    sb.append(o);
                     sb.append(format);
                 }
                 // 是否添加空格
@@ -1026,7 +1028,575 @@ public class ArrayUtil {
         }
         return true;
     }
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int indexOf(int[] array, int val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int lastIndexOf(int[] array, int val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 是|否
+     */
+    public static boolean contains(int[] array, int val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int indexOf(byte[] array, byte val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int lastIndexOf(byte[] array, byte val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 是|否
+     */
+    public static boolean contains(byte[] array, byte val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int indexOf(short[] array, short val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int lastIndexOf(short[] array, short val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 是|否
+     */
+    public static boolean contains(short[] array, short val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int indexOf(long[] array, long val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int lastIndexOf(long[] array, long val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 是|否
+     */
+    public static boolean contains(long[] array, long val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int indexOf(float[] array, float val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int lastIndexOf(float[] array, float val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 是|否
+     */
+    public static boolean contains(float[] array, float val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int indexOf(double[] array, double val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int lastIndexOf(double[] array, double val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 是|否
+     */
+    public static boolean contains(double[] array, double val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 查询元素是否在数组中
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int indexOf(char[] array, char val) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (val == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 从数组后方开始查找元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 索引
+     */
+    public static int lastIndexOf(char[] array, char val) {
+        if (null != array) {
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (array[i] == val) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUNT;
+    }
+
+    /**
+     * 判断数组是否包含元素
+     *
+     * @param array 数组
+     * @param val   元素
+     * @return 是|否
+     */
+    public static boolean contains(char[] array, char val) {
+        return indexOf(array, val) > INDEX_NOT_FOUNT;
+    }
     // index操作end
+
+    // sub操作start
+
+    /**
+     * 截取数组
+     *
+     * @param arr   数组
+     * @param start 起始索引
+     * @param end   结束索引
+     * @param <T>   泛型
+     * @return 截取后的数组
+     */
+    public static <T> T[] sub(T[] arr, int start, int end) {
+        if (null == arr || arr.length < 1) {
+            throw new UtilException(CodeResultEnum.NULL_FAILURE);
+        }
+        if (start < 0) {
+            start = 0;
+        }
+        end += 1;
+        if (end > arr.length) {
+            end = arr.length;
+        }
+        if (start > end) {
+            int temp = start;
+            start = end;
+            end = temp;
+        }
+        if (start == end) {
+            return newArray(arr, 0);
+        }
+        return Arrays.copyOfRange(arr, start, end);
+    }
+
+    /**
+     * 截取数组
+     *
+     * @param arr 数组
+     * @param end 结束位置
+     * @param <T> 泛型
+     * @return 截取后的数组
+     */
+    public static <T> T[] sub(T[] arr, int end) {
+        return sub(arr, ComConstant.ZERO, end);
+    }
+
+    // sub操作end
+
+    // remove操作start
+
+    /**
+     * 删除数组中元素，根据值
+     *
+     * @param arr 数组
+     * @param obj 元素值
+     * @param <T> 泛型
+     * @return 删除后的数组
+     */
+    public static <T> T[] remove(T[] arr, Object obj) {
+        if (isEmpty(arr)) {
+            return null;
+        }
+        if (indexOf(arr, obj) > INDEX_NOT_FOUNT) {
+            int index = indexOf(arr, obj);
+            return remove(remove(arr, index), obj);
+        }
+        return arr;
+    }
+
+    /**
+     * 根据索引删除数组元素
+     *
+     * @param arr   数组
+     * @param index 索引
+     * @param <T>   泛型
+     * @return 删除后的数组
+     */
+    public static <T> T[] remove(T[] arr, int index) {
+        if (isEmpty(arr)) {
+            return null;
+        }
+        if (index > arr.length - 1 || index < 0) {
+            return arr;
+        }
+        T[] rst = newArray(arr, arr.length - 1);
+        System.arraycopy(arr, 0, rst, 0, index);
+        System.arraycopy(arr, index + 1, rst, index, arr.length - index - 1);
+        return rst;
+    }
+
+    // remove操作end
+    // reverse反转数组start
+
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static <T> void reverse(T[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        T temp;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+    
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static void reverse(int[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        int temp;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static void reverse(short[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        short temp;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static void reverse(byte[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        byte temp;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static void reverse(long[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        long temp;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static void reverse(float[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        float temp;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static void reverse(double[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        double temp;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    /**
+     * 反转数组
+     * 改变原本数组
+     *
+     * @param arr 数组
+     */
+    public static void reverse(char[] arr) {
+        if (isEmpty(arr)) {
+            return;
+        }
+        char temp;
+        for (int i = 0; i < arr.length / ComConstant.TWO; i++) {
+            temp = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    // reverse数组反转end
+
 
     // 数组操作end -----------------------------
 }

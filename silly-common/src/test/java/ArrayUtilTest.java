@@ -98,10 +98,31 @@ public class ArrayUtilTest {
     public void indexOfTest() {
         String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
         String[] strArr2 = new String[]{"abc", "ghj", "def"};
+        int[] i = new int[]{123,32,41};
         System.out.println(ArrayUtil.indexOf(strArr,"Abc"));
         System.out.println(ArrayUtil.indexOfIgnoreCase(strArr,new User()));
         System.out.println(ArrayUtil.lastIndexOf(strArr,"def"));
         System.out.println(ArrayUtil.contains(strArr,"ghj"));
         System.out.println(ArrayUtil.containsAll(strArr,strArr2));
+    }
+
+    @Test
+    public void subTest() {
+        String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
+        String[] sub = ArrayUtil.sub(strArr, 0, 2);
+        System.out.println(ArrayUtil.toString(sub));
+    }
+
+    @Test
+    public void removeTest() {
+        String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
+        System.out.println(ArrayUtil.toString(ArrayUtil.remove(strArr,"4")));
+    }
+
+    @Test
+    public void reverseTest(){
+        String[] strArr = new String[]{"abc", "klm", "ghj", "def","mok","asdqw"};
+        ArrayUtil.reverse(strArr);
+        System.out.println(ArrayUtil.toString(strArr));
     }
 }
