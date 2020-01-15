@@ -13,7 +13,7 @@ import java.util.*;
  * 数组工具类
  *
  * @author hanhan
- * @version 1.0
+ * @version 1.0.3
  * @date 2019/11/28
  */
 public class ArrayUtil {

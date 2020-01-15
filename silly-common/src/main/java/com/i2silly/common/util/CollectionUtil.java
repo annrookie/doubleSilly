@@ -101,7 +101,7 @@ public class CollectionUtil {
      * @param <V>  值泛型
      * @return 分完组的Map
      */
-    public static <V> Map<String, List<Map<String, V>>> listDivide(List<Map<String, V>> list, String... keys) {
+    public static <V> Map<String, List<Map<String, V>>> listDivide(List<Map<String, V>> list, String[] keys) {
         if (isEmpty(list)) {
             return null;
         }
@@ -134,7 +134,7 @@ public class CollectionUtil {
      * @param <T>      javaBean
      * @return 分完组的Map
      */
-    public static <T> Map<String, List<T>> listBeanDivide(List<T> listBean, String... keys) {
+    public static <T> Map<String, List<T>> listBeanDivide(List<T> listBean, String[] keys) {
         if (isEmpty(listBean)) {
             throw new UtilException(CodeResultEnum.NULL_FAILURE);
         }

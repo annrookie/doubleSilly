@@ -113,11 +113,6 @@ public class ComConstant {
     public static final String NULL_STR = "null";
 
     /**
-     * 英文字母
-     */
-    public static final String LETTER = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-
-    /**
      * 小写字母
      */
     public static final String LOW_LETTER = "qwertyuiopasdfghjklzxcvbnm";
@@ -126,6 +121,11 @@ public class ComConstant {
      * 大写字母
      */
     public static final String UP_LETTER = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+    /**
+     * 英文字母
+     */
+    public static final String LETTER = LOW_LETTER + UP_LETTER;
 
     /**
      * 数字
@@ -140,12 +140,15 @@ public class ComConstant {
     /**
      * 英文字符
      */
-    public static final String CHARACTER = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789`~!@#$%^&*()_+-=}{\\|]['\";:/.,<>";
+    public static final String CHARACTER = LETTER + NUMBER + SING;
 
     /**
      * *
      */
     public static final char START = '*';
 
+    /**
+     * 下划线
+     */
     public static final char UNDERLINE = '_';
 }
