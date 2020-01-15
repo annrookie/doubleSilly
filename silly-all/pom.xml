@@ -6,7 +6,7 @@
     <parent>
         <artifactId>DoubleSilly</artifactId>
         <groupId>com.github.i2silly</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.github.i2silly</groupId>
             <artifactId>silly-common</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 
