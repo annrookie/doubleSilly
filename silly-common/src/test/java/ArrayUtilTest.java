@@ -98,12 +98,12 @@ public class ArrayUtilTest {
     public void indexOfTest() {
         String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
         String[] strArr2 = new String[]{"abc", "ghj", "def"};
-        int[] i = new int[]{123,32,41};
-        System.out.println(ArrayUtil.indexOf(strArr,"Abc"));
-        System.out.println(ArrayUtil.indexOfIgnoreCase(strArr,new User()));
-        System.out.println(ArrayUtil.lastIndexOf(strArr,"def"));
-        System.out.println(ArrayUtil.contains(strArr,"ghj"));
-        System.out.println(ArrayUtil.containsAll(strArr,strArr2));
+        int[] i = new int[]{123, 32, 41};
+        System.out.println(ArrayUtil.indexOf(strArr, "Abc"));
+        System.out.println(ArrayUtil.indexOfIgnoreCase(strArr, new User()));
+        System.out.println(ArrayUtil.lastIndexOf(strArr, "def"));
+        System.out.println(ArrayUtil.contains(strArr, "ghj"));
+        System.out.println(ArrayUtil.containsAll(strArr, strArr2));
     }
 
     @Test
@@ -116,13 +116,19 @@ public class ArrayUtilTest {
     @Test
     public void removeTest() {
         String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
-        System.out.println(ArrayUtil.toString(ArrayUtil.remove(strArr,"4")));
+        System.out.println(ArrayUtil.toString(ArrayUtil.remove(strArr, "4")));
     }
 
     @Test
-    public void reverseTest(){
-        String[] strArr = new String[]{"abc", "klm", "ghj", "def","mok","asdqw"};
+    public void reverseTest() {
+        String[] strArr = new String[]{"abc", "klm", "ghj", "def", "mok", "asdqw"};
         ArrayUtil.reverse(strArr);
         System.out.println(ArrayUtil.toString(strArr));
+    }
+
+    @Test
+    public void distinctTest() {
+        String[] strArr = new String[]{"abc", "klm", "ghj", "def", "mok", "asdqw"};
+        System.out.println(ArrayUtil.toString(ArrayUtil.distinct(strArr)));
     }
 }

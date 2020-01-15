@@ -1,6 +1,5 @@
 package com.i2silly.common.util;
 
-import com.i2silly.common.constant.ArrayFilterEnum;
 import com.i2silly.common.constant.CodeResultEnum;
 import com.i2silly.common.constant.ComConstant;
 import com.i2silly.common.exception.UtilException;
@@ -221,22 +220,74 @@ public class ArrayUtil {
      * 判断可变参数数组是否存在空白符
      *
      * @param arr 数组
-     * @param <T> 可变参数
      * @return 是|否
      */
-    @SuppressWarnings("unchecked")
-    public static <T> boolean hasNull(T... arr) {
+    public static boolean hasNull(Object... arr) {
         if (arr == null) {
             return true;
         }
         if (isNotEmpty(arr)) {
-            for (T t : arr) {
+            for (Object t : arr) {
                 if (t == null) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * 数组是否存在空
+     *
+     * @param arr 数组
+     * @return 是|否
+     */
+    public static boolean hasEmpty(Object... arr) {
+        if (isEmpty(arr)) {
+            return true;
+        }
+        for (Object o : arr) {
+            if (CommonUtil.isEmpty(o)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断二维数组是否全为空
+     *
+     * @param arr 二维数组
+     * @return 是|否
+     */
+    public static boolean isAllEmpty(Object[][] arr) {
+        if (isEmpty(arr)) {
+            return true;
+        }
+        for (Object[] o : arr) {
+            if (isNotEmpty(o)) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断二维数组全部不为空
+     *
+     * @param arr 二维数组
+     * @return 是|否
+     */
+    public static boolean isAllNotEmpty(Object[][] arr) {
+        if (isEmpty(arr)) {
+            return false;
+        }
+        for (Object[] o : arr) {
+            if (isEmpty(o)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // 常见判断end -----------------------------------------------------
@@ -762,8 +813,7 @@ public class ArrayUtil {
      * @param <T>      泛型
      * @return 追加完的数组
      */
-    @SuppressWarnings("unchecked")
-    public static <T> Object[] append(T[] arr, T... elements) {
+    public static <T> Object[] append(T[] arr, Object... elements) {
         return insert(arr, arr.length, elements);
     }
 
@@ -777,8 +827,7 @@ public class ArrayUtil {
      * @param <T>     泛型
      * @return 对象数组
      */
-    @SafeVarargs
-    public static <T> Object[] insert(T[] arr, int index, T... element) {
+    public static <T> Object[] insert(T[] arr, int index, Object[] element) {
         if (isEmpty(arr)) {
             return element;
         }
@@ -820,8 +869,7 @@ public class ArrayUtil {
      * @param <T>     泛型
      * @return 追加或替换完的数组【Object数组】
      */
-    @SuppressWarnings("unchecked")
-    public static <T> Object[] replaceOrAppend(T[] arr, int index, T... element) {
+    public static <T> Object[] replaceOrAppend(T[] arr, int index, Object[] element) {
         if (isEmpty(arr) || index <= 0) {
             return element;
         }
@@ -1468,7 +1516,7 @@ public class ArrayUtil {
             arr[i] = temp;
         }
     }
-    
+
     /**
      * 反转数组
      * 改变原本数组
@@ -1596,6 +1644,26 @@ public class ArrayUtil {
     }
 
     // reverse数组反转end
+
+    // distinct 去重 start
+
+    /**
+     * 数组去重
+     *
+     * @param t   数组
+     * @param <T> 泛型
+     * @return 去重后的数组
+     */
+    public static <T> T[] distinct(T[] t) {
+        if (isEmpty(t)) {
+            return newArray(t, 0);
+        }
+        Set<T> set = new HashSet<>();
+        Collections.addAll(set, t);
+        return set.toArray(newArray(t, set.size()));
+    }
+
+    // distinct 去重 end
 
 
     // 数组操作end -----------------------------
