@@ -1,3 +1,4 @@
+import com.i2silly.common.constant.ComConstant;
 import com.i2silly.common.util.CollectionUtil;
 import com.i2silly.common.util.NewUtil;
 import com.i2silly.common.util.RandomUtil;
@@ -6,6 +7,36 @@ import org.junit.Test;
 import java.util.*;
 
 public class CollectionUtilTest {
+
+    @Test
+    public void isEmptyTest() {
+        List<String> aa = NewUtil.list();
+        aa.add("23");
+        System.out.println(CollectionUtil.isEmpty(aa.iterator()));
+    }
+
+    @Test
+    public void hasNullTest() {
+        List<String> aa = null;
+        System.out.println(CollectionUtil.hasNull(aa));
+    }
+
+    @Test
+    public void countEleTest(){
+        List<String> aa =RandomUtil.randomList(6);
+        List<String> aa1 = NewUtil.list();
+        aa1.add("23");
+        aa1.add("23");
+        aa1.add("231");
+        System.out.println(CollectionUtil.countEle(aa1));
+    }
+
+    @Test
+    public void mergeToMapTest(){
+        List<String> a = RandomUtil.randomList(ComConstant.LETTER,3,2);
+        List<String> b = RandomUtil.randomList(ComConstant.NUMBER,6,3);
+        System.out.println(CollectionUtil.mergeToMap(a,b,true));
+    }
 
     @Test
     public void unionTest() {
@@ -32,7 +63,7 @@ public class CollectionUtilTest {
         cc.add("vvv");
         List<String> bb = NewUtil.list();
         Set<String> dd = NewUtil.set();
-        bb.add("12");
+        bb.add("23");
         dd.add("444");
         List<String> union1 = CollectionUtil.intersection(aa, bb);
         Set<String> union2 = CollectionUtil.intersection(cc, dd);
@@ -41,39 +72,21 @@ public class CollectionUtilTest {
     }
 
     @Test
-    public void differenceTest() {
-        List<String> aa = NewUtil.list();
-        Set<String> cc = NewUtil.set();
-       /* aa.add("23");
-        aa.add("12");
-        aa.add("41");*/
-        cc.add("vvv");
-        List<String> bb = NewUtil.list();
-        Set<String> dd = NewUtil.set();
-        bb.add("12");
-        dd.add("444");
-        List<String> union1 = CollectionUtil.difference(aa, bb);
-        Set<String> union2 = CollectionUtil.difference(cc, dd);
-        System.out.println(union1);
-        System.out.println(union2);
-    }
-
-    @Test
     public void complementTest() {
-        List<String> aa = NewUtil.list();
-        Set<String> cc = NewUtil.set();
+        List<String> aa = new ArrayList<>();
+        Set<String> cc = null;
         aa.add("23");
-        aa.add("12");
-        aa.add("41");
-        cc.add("vvv");
-        List<String> bb = NewUtil.list();
-        Set<String> dd = NewUtil.set();
+////        aa.add("12");
+//        aa.add("41");
+//        cc.add("vvv");
+        List<String> bb = new ArrayList<>();
+        Set<String> dd = null;
         bb.add("12");
-        dd.add("444");
+//        dd.add("444");
         List<String> union1 = CollectionUtil.complement(aa, bb);
-        Set<String> union2 = CollectionUtil.difference(cc, dd);
+//        Set<String> union2 = CollectionUtil.difference(cc, dd);
         System.out.println(union1);
-        System.out.println(union2);
+//        System.out.println(union2);
     }
 
     @Test
@@ -104,7 +117,7 @@ public class CollectionUtilTest {
         list.add(map1);
         list.add(map2);
         list.add(map3);
-        Map<String, List<Map<String, Object>>> map = CollectionUtil.listDivide(list, "id","name");
+        Map<String, List<Map<String, Object>>> map = CollectionUtil.listDivide(list, new String[]{"id", "name"});
 
         if (map != null) {
             Set<String> keySet = map.keySet();
@@ -117,12 +130,12 @@ public class CollectionUtilTest {
 
     @Test
     public void listBeanDivide() {
-        User user1 = new User("hhh",13,"男",318);
-        User user2 = new User("xxx",13,"女",21);
+        User user1 = new User("hhh", 13, "男", 318);
+        User user2 = new User("xxx", 13, "女", 21);
         List<User> list = new ArrayList<>();
         list.add(user1);
         list.add(user2);
-        Map<String, List<User>> name = CollectionUtil.listBeanDivide(list, "id");
+        Map<String, List<User>> name = CollectionUtil.listBeanDivide(list, new String[]{"id"});
         System.out.println(name);
     }
 }

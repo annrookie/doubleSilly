@@ -91,7 +91,7 @@ public class ArrayUtilTest {
     public void mergeTest() {
         String[] strArr = new String[]{"abc", "klm", "ghj", "def"};
         Integer[] strArr2 = new Integer[]{123, 523, 6546, 9897};
-        System.out.println(ArrayUtil.merge(strArr, strArr2, true));
+        System.out.println(ArrayUtil.mergeToMap(strArr, strArr2, true));
     }
 
     @Test

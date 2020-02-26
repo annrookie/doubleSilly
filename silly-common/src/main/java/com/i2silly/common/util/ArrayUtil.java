@@ -947,7 +947,7 @@ public class ArrayUtil {
      * @param <V>    值泛型
      * @return 键值对
      */
-    public static <K, V> Map<K, V> merge(K[] key, V[] value, boolean isSort) {
+    public static <K, V> Map<K, V> mergeToMap(K[] key, V[] value, boolean isSort) {
         if (isEmpty(key) || isEmpty(value)) {
             return null;
         }
@@ -975,8 +975,8 @@ public class ArrayUtil {
      * @param <V>   值泛型
      * @return 键值对
      */
-    public static <K, V> Map<K, V> merge(K[] key, V[] value) {
-        return merge(key, value, false);
+    public static <K, V> Map<K, V> mergeToMap(K[] key, V[] value) {
+        return mergeToMap(key, value, false);
     }
 
     // 映射键值对end----------------------------
