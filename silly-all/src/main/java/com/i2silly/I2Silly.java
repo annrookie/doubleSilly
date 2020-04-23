@@ -11,6 +11,6 @@ public class I2Silly {
      * 憨憨工具类
      */
     private I2Silly(){
-
+ // fjxjfxj
     }
 }
